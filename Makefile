@@ -14,12 +14,9 @@ HEADER_FILE = $(DIRINC)ft_printf.h
 OBJS = ${SRC:.c=.o}
 DEPS = ${SRC:.c=.d}
 
-.DEFAULT_GOAL := all
-
--include $(DEPS)
-
 all: ${NAME}
 
+-include $(DEPS)
 %.o: %.c
 	${CC} ${CFLAGS} -MMD -MP -c $< -o $@
 
