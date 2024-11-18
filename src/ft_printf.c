@@ -6,7 +6,7 @@
 /*   By: mniemaz <mniemaz@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:22:13 by mniemaz           #+#    #+#             */
-/*   Updated: 2024/11/18 11:06:44 by mniemaz          ###   ########.fr       */
+/*   Updated: 2024/11/18 11:12:35 by mniemaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int	ft_printf(const char *str, ...)
 	int		i;
 	int		counter;
 
-	counter = 0;
 	if (!str || write(1, 0, 0) == -1)
 		return (-1);
+	counter = 0;
 	va_start(ptr, str);
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		if (str[i] == '%' && str[i + 1])
 		{
@@ -57,10 +57,7 @@ int	ft_printf(const char *str, ...)
 			i++;
 		}
 		else
-		{
 			counter += ft_putchar(str[i]);
-		}
-		i++;
 	}
 	va_end(ptr);
 	return (counter);
