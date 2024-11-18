@@ -6,12 +6,11 @@
 /*   By: mniemaz <mniemaz@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:22:13 by mniemaz           #+#    #+#             */
-/*   Updated: 2024/11/15 18:49:49 by mniemaz          ###   ########.fr       */
+/*   Updated: 2024/11/18 11:06:44 by mniemaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
-#include <stdint.h>
 
 int	print_arg(char flag, va_list ptr)
 {
@@ -19,21 +18,23 @@ int	print_arg(char flag, va_list ptr)
 
 	counter = 0;
 	if (flag == 's')
-		counter += ft_putstr_fd(va_arg(ptr, char *), 1);
+		counter += ft_putstr(va_arg(ptr, char *));
 	else if (flag == 'd' || flag == 'i')
-		counter += ft_putnbr_fd(va_arg(ptr, int), 1);
+		counter += ft_putnbr(va_arg(ptr, int));
 	else if (flag == 'c')
-		counter += ft_putchar_fd(va_arg(ptr, int), 1);
+		counter += ft_putchar(va_arg(ptr, int));
 	else if (flag == 'u')
-		counter += ft_put_unsigned_nbr_fd(va_arg(ptr, unsigned int), 1);
+		counter += ft_put_ui_base(va_arg(ptr, unsigned int), "0123456789");
 	else if (flag == 'x')
-		counter += ft_putnbr_base(va_arg(ptr, int), "0123456789abcdef", 1);
+		counter += ft_put_ui_base(va_arg(ptr, unsigned int),
+				"0123456789abcdef");
 	else if (flag == 'X')
-		counter += ft_putnbr_base(va_arg(ptr, int), "0123456789ABCDEF", 1);
+		counter += ft_put_ui_base(va_arg(ptr, unsigned int),
+				"0123456789ABCDEF");
 	else if (flag == '%')
-		counter += ft_putchar_fd('%', 1);
+		counter += ft_putchar('%');
 	else if (flag == 'p')
-		counter += ft_putaddr_fd(va_arg(ptr, unsigned long long), 1);
+		counter += ft_putaddr(va_arg(ptr, unsigned long));
 	return (counter);
 }
 
@@ -57,38 +58,10 @@ int	ft_printf(const char *str, ...)
 		}
 		else
 		{
-			counter += ft_putchar_fd(str[i], 1);
+			counter += ft_putchar(str[i]);
 		}
 		i++;
 	}
 	va_end(ptr);
 	return (counter);
-}
-
-// #include <limits.h>
-// #include <stdio.h>
-
-// #define CONTENT "u", "toi"
-
-// int	main(void)
-// {
-// 	// printf(CONTENT);
-// 	// d c u x X % p i
-// 	// printf("\nsize:%d\n", printf(CONTENT));
-// 	char *str;
-
-// 	str = NULL;
-// 	printf("\nsize:%d\n", ft_printf(CONTENT));
-// 	printf("\n");
-// 	// printf("\nsize:%d\n", printf(CONTENT));
-
-// 	// printf("hello %l");
-// }
-
-int main()
-{
-	void *ptr;
-	
-	ft_printf("%p\n", (void *)__LONG_MAX__);
-	printf("%p\n", (void *)__LONG_MAX__);
 }

@@ -6,13 +6,13 @@
 /*   By: mniemaz <mniemaz@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:44:45 by mniemaz           #+#    #+#             */
-/*   Updated: 2024/11/15 18:57:57 by mniemaz          ###   ########.fr       */
+/*   Updated: 2024/11/18 10:55:34 by mniemaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_putnbr_fd(int nbr, int fd)
+int	ft_putnbr(int nbr)
 {
 	unsigned int	u_nbr;
 	int				counter;
@@ -20,7 +20,7 @@ int	ft_putnbr_fd(int nbr, int fd)
 	counter = 0;
 	if (nbr < 0)
 	{
-		ft_putchar_fd('-', fd);
+		ft_putchar('-');
 		counter++;
 		u_nbr = -nbr;
 	}
@@ -28,64 +28,54 @@ int	ft_putnbr_fd(int nbr, int fd)
 		u_nbr = nbr;
 	if (u_nbr < 10)
 	{
-		return (counter + ft_putchar_fd(nbr + '0', fd));
+		return (counter + ft_putchar(u_nbr + '0'));
 	}
 	else
 	{
-		counter += ft_putnbr_fd(u_nbr / 10, fd);
-		return (counter + ft_putnbr_fd(u_nbr % 10, fd));
+		counter += ft_putnbr(u_nbr / 10);
+		return (counter + ft_putnbr(u_nbr % 10));
 	}
 }
 
-int	ft_putnbr_base(int nbr, char *base, int fd)
+int	ft_put_ui_base(unsigned int nbr, char *base)
 {
 	unsigned int	u_nbr;
 	int				counter;
 
 	counter = 0;
-	if (nbr < 0)
-	{
-		ft_putchar_fd('-', fd);
-		counter++;
-		u_nbr = -nbr;
-	}
-	else
-		u_nbr = nbr;
+	u_nbr = nbr;
 	if (u_nbr < ft_strlen(base))
-	{
-		return (counter + ft_putchar_fd(base[u_nbr], fd));
-	}
+		return (counter + ft_putchar(base[u_nbr]));
 	else
 	{
-		counter += ft_putnbr_base(u_nbr / ft_strlen(base), base, fd);
-		return (counter + ft_putnbr_base(u_nbr % ft_strlen(base), base, fd));
+		counter += ft_put_ui_base(u_nbr / ft_strlen(base), base);
+		return (counter + ft_put_ui_base(u_nbr % ft_strlen(base),
+				base));
 	}
 }
 
-int	ft_put_ul_base(unsigned long long nbr, char *base, int fd)
+int	ft_put_ul_base(unsigned long nbr, char *base)
 {
 	int	counter;
 
 	counter = 0;
 	if (nbr < ft_strlen(base))
-	{
-		return (counter + ft_putchar_fd(base[nbr], fd));
-	}
+		return (counter + ft_putchar(base[nbr]));
 	else
 	{
-		counter += ft_putnbr_base(nbr / ft_strlen(base), base, fd);
-		return (counter + ft_putnbr_base(nbr % ft_strlen(base), base, fd));
+		counter += ft_put_ul_base(nbr / ft_strlen(base), base);
+		return (counter + ft_put_ul_base(nbr % ft_strlen(base), base));
 	}
 }
 
-int	ft_putstr_fd(char *s, int fd)
+int	ft_putstr(char *s)
 {
 	if (!s)
-		return (ft_putstr_fd("(null)", fd));
-	return (write(fd, s, ft_strlen(s)));
+		return (ft_putstr("(null)"));
+	return (write(1, s, ft_strlen(s)));
 }
 
-int	ft_putchar_fd(char c, int fd)
+int	ft_putchar(char c)
 {
-	return (write(fd, &c, 1));
+	return (write(1, &c, 1));
 }

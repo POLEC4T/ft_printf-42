@@ -6,7 +6,7 @@
 /*   By: mniemaz <mniemaz@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:22:03 by mniemaz           #+#    #+#             */
-/*   Updated: 2024/11/15 18:43:19 by mniemaz          ###   ########.fr       */
+/*   Updated: 2024/11/18 10:55:28 by mniemaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-int	ft_put_unsigned_nbr_fd(unsigned int nbr, int fd);
-int	ft_put_ul_base(unsigned long long nbr, char *base, int fd);
-int	ft_putchar_fd(char c, int fd);
-int	ft_putnbr_fd(int nbr, int fd);
-int	ft_putnbr_base(int nbr, char *base, int fd);
-int	ft_putaddr_fd(unsigned long long addr, int fd);
-int	ft_putstr_fd(char *s, int fd);
-int ft_printf(const char *str, ...);
+int		ft_put_unsigned_nbr(unsigned int nbr);
+int		ft_put_ul_base(unsigned long nbr, char *base);
+int		ft_putchar(char c);
+int		ft_putnbr(int nbr);
+int		ft_put_ui_base(unsigned int nbr, char *base);
+int		ft_putaddr(unsigned long addr);
+int		ft_putstr(char *s);
+int		ft_printf(const char *str, ...);
 size_t	ft_strlen(const char *str);
 
 #endif
