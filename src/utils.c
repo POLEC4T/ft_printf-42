@@ -6,11 +6,11 @@
 /*   By: mniemaz <mniemaz@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:22:40 by mniemaz           #+#    #+#             */
-/*   Updated: 2024/11/18 10:00:52 by mniemaz          ###   ########.fr       */
+/*   Updated: 2024/11/18 13:14:11 by mniemaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include <stddef.h>
 
 size_t	ft_strlen(const char *str)
 {
