@@ -6,7 +6,7 @@
 /*   By: mniemaz <mniemaz@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:22:13 by mniemaz           #+#    #+#             */
-/*   Updated: 2024/11/18 11:12:35 by mniemaz          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:51:50 by mniemaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_printf(const char *str, ...)
 			counter += print_arg(str[i + 1], ptr);
 			i++;
 		}
-		else
+		else if (str[i] != '%')
 			counter += ft_putchar(str[i]);
 	}
 	va_end(ptr);
